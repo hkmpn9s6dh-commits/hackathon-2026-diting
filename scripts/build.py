@@ -1,6 +1,7 @@
 """一条命令从零重建全部交付物。
 
-顺序：字体子集（或核对）→ 三视图 PNG → A3 展示页 → 音轨 → 15 秒动效 → GIF → 介绍 PDF。
+顺序：字体子集（或核对）→ 三视图 PNG → 音轨 → 15 秒动效 → A3 展示页 → GIF → 介绍 PDF。
+（展示页底部要贴 4 张关键帧，所以必须排在动效之后——这条在全新 clone 里踩过一次。）
 """
 
 from __future__ import annotations
@@ -27,14 +28,14 @@ def main():
 
     run("字体子集", fonts.build)
     run("三视图 PNG", views.main)
-    run("A3 展示页 / 音轨", lambda: None)
-    import scripts.sheet as sheet
-
-    run("A3 展示页", sheet.main)
     run("音轨", audio.main)
     import scripts.animate as animate
 
+    # 展示页要用动效的关键帧，必须排在 animate 之后
     run("15 秒动效", animate.main)
+    import scripts.sheet as sheet
+
+    run("A3 展示页", sheet.main)
     run("GIF", lambda: subprocess.run(
         ["ffmpeg", "-y", "-loglevel", "error", "-i", "out/diting-motion-15s.mp4",
          "-vf", "fps=20,scale=720:720:flags=lanczos", "-loop", "0",

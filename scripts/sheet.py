@@ -61,7 +61,11 @@ def _frame_png(t, size=214):
     from PIL import Image
 
     idx = max(0, min(449, int(round(t * 30))))
-    im = Image.open(f"out/_frames/f{idx:04d}.png")
+    path = f"out/_frames/f{idx:04d}.png"
+    if not os.path.exists(path):
+        raise SystemExit(f"缺关键帧 {path}：先跑 scripts/animate.py（或 scripts/build.py），"
+                         f"展示页底部要贴四张帧。")
+    im = Image.open(path)
     im = im.crop((196, 86, 884, 1016))
     im.thumbnail((size * 2, size * 2), Image.LANCZOS)
     buf = BytesIO()
