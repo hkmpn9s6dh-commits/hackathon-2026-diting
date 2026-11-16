@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>青听 · 谛听 IP 形象</title>
+<style>
+  @font-face { font-family: QTSerif; src: url(assets/fonts/NotoSerifSC-sub.woff2) format('woff2'); font-display: swap; }
+  @font-face { font-family: QTSans;  src: url(assets/fonts/NotoSansSC-sub.woff2) format('woff2'); font-display: swap; }
+  :root { --paper:#FBFAF7; --ink:#2B2A26; --grey:#7A756B; --line:#E2DBCE; --bronze:#A9803C; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:QTSerif, serif; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 56px 24px 96px; }
+  .kicker { font-family:QTSans; font-size:12px; letter-spacing:.2em; color:var(--grey); }
+  h1 { font-size:84px; letter-spacing:.08em; margin:10px 0 2px; font-weight:600; }
+  .roman { font-family:QTSans; font-size:15px; letter-spacing:.28em; color:var(--grey); }
+  .tag { font-size:22px; margin:22px 0 4px; }
+  .tag-en { font-family:QTSans; font-size:13px; color:var(--grey); }
+  .rule { height:1px; background:var(--line); margin:36px 0; }
+  .sheet { width:100%; display:block; border:1px solid var(--line); background:#fff; }
+  h2 { font-family:QTSans; font-size:14px; letter-spacing:.16em; font-weight:600; margin:44px 0 12px; }
+  .views { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .views figure { margin:0; }
+  .views img { width:100%; display:block; }
+  .views figcaption { font-family:QTSans; font-size:12px; color:var(--grey); letter-spacing:.1em; margin-top:8px; }
+  video { width:min(100%,520px); display:block; margin:0 auto; background:#fff; border:1px solid var(--line); }
+  .memory { display:grid; grid-template-columns: 1fr 2fr; gap:32px; align-items:start; }
+  .memory h3 { font-size:34px; margin:0; font-weight:600; }
+  .memory p { font-family:QTSans; font-size:14.5px; line-height:1.9; color:#4A4740; margin:6px 0 0; }
+  .links { font-family:QTSans; font-size:13.5px; line-height:2.1; }
+  .links a { color:var(--ink); text-decoration:none; border-bottom:1px solid var(--line); }
+  .links a:hover { border-color:var(--bronze); }
+  .foot { font-family:QTSans; font-size:12px; color:var(--grey); margin-top:56px; border-top:1px solid var(--line); padding-top:14px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  @media (max-width:760px){ h1{font-size:56px} .memory{grid-template-columns:1fr} .views{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">2026 九子岩 AIGC 文旅短视频创意大赛 · 第一轮 · 谛听 IP 形象</div>
+  <h1>青听</h1>
+  <div class="roman">QĪNG TĪNG</div>
+  <p class="tag">一只把耳朵长成七道泉的小谛听</p>
+  <p class="tag-en">A cub of Diting, listening at the foot of Jiuziyan</p>
+
+  <div class="rule"></div>
+
+  <a href="out/diting-turnaround-A3.png"><img class="sheet" src="out/diting-turnaround-A3.png" alt="青听 三视图展示页"></a>
+
+  <h2>15 秒白底动效</h2>
+  <video src="out/diting-motion-15s.mp4" autoplay muted loop playsinline controls poster="out/diting-front.png"></video>
+
+  <h2>三个视图</h2>
+  <div class="views">
+    <figure><img src="out/diting-front.png" alt="正视"><figcaption>正視 FRONT</figcaption></figure>
+    <figure><img src="out/diting-side.png" alt="侧视"><figcaption>側視 SIDE</figcaption></figure>
+    <figure><img src="out/diting-back.png" alt="背视"><figcaption>背視 BACK</figcaption></figure>
+  </div>
+
+  <h2>记忆点</h2>
+  <div class="memory">
+    <h3>耳朵里流着七道泉</h3>
+    <p>每只耳朵七道水纹，对应九子岩七布泉的七道跌水。它听见什么，哪一道就先亮。<br>
+    三视图不是画三遍：同一组三维体块，分别做正交投影——所以三个角度是同一只兽。</p>
+  </div>
+
+  <h2>文件</h2>
+  <div class="links">
+    <div><a href="out/diting-turnaround-A3.png">三视图展示页（A3 · 3508×2480 · 300dpi）</a></div>
+    <div><a href="out/diting-motion-15s.mp4">15 秒白底动效（1080×1080 · 30fps · 带音轨）</a></div>
+    <div><a href="out/diting-motion-15s.gif">同上 GIF（720×720）</a></div>
+    <div><a href="out/diting-intro.pdf">形象介绍（800–1500 字 · A4）</a></div>
+  </div>
+
+  <div class="foot">
+    <span>2026 九子岩 AIGC 文旅短视频创意大赛 · 第一轮 · 谛听 IP 形象</span>
+    <span>作者 张一 · 2026.11</span>
+  </div>
+</div>
+</body>
+</html>
