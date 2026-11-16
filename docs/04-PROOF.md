@@ -37,12 +37,16 @@ $ python scripts/build.py
 
 | 文件 | clone 里（提交版） | 重建后 | |
 |---|---|---|---|
-| `out/diting-turnaround-A3.png` | `1fb20b0929379a65…` | `1fb20b0929379a65…` | ✅ |
-| `out/diting-front.png` | `456b460db4a14db1…` | `456b460db4a14db1…` | ✅ |
-| `out/diting-side.png` | `693d19bd8c2e605b…` | `693d19bd8c2e605b…` | ✅ |
-| `out/diting-back.png` | `5896e6eda40c08dc…` | `5896e6eda40c08dc…` | ✅ |
+| `out/diting-turnaround-A3.png` | `1fb20b0929379a65…` | `1fb20b0929379a65…` | ✅（v1 时实测） |
+| `out/diting-front.png` | `456b460db4a14db1…` | `456b460db4a14db1…` | ✅（v1 时实测） |
+| `out/diting-side.png` | `693d19bd8c2e605b…` | `693d19bd8c2e605b…` | ✅（v1 时实测） |
+| `out/diting-back.png` | `5896e6eda40c08dc…` | `5896e6eda40c08dc…` | ✅（v1 时实测） |
 
 **结论：这台机器上，同一份代码两次构建逐字节一致。**（不是"看起来一样"，是 sha256 相同。）
+
+> 上表是 v1 的重建记录。v2（加了姿态）重推之后又做了一遍全新 clone 复验：
+> `verify.sh` 全绿，`diting-turnaround-A3.png` = `50428805e5ceaf5a…`、
+> `diting-front.png` = `f4acfc9d5ac69fe0…`，与本机逐字节相同。
 
 ## 4. 踩到的坑（写进构建脚本，不写进改单）
 
