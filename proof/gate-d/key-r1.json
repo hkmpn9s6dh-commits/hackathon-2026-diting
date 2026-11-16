@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "A": {
+      "ear_scale": 1.0,
+      "ear_pitch": 0.0
+    },
+    "B": {
+      "ear_scale": 0.86,
+      "ear_pitch": -6.0
+    },
+    "C": {
+      "ear_scale": 1.1,
+      "ear_pitch": 8.0
+    }
+  }
+}
