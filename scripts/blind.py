@@ -96,6 +96,34 @@ def build_round2(ours=f"{OUT}/var-A.png"):
     print("wrote", f"{OUT}/round2.png", key)
 
 
+def build_round1_r2():
+    """第 2 轮的同题盲排：v1 原版、v1 里评委偏好的那版、改法后的 v2。"""
+    from rig import character
+
+    os.makedirs(OUT, exist_ok=True)
+    panels = {
+        "P": dict(ear_scale=1.00, ear_pitch=0.0),                        # v1 原版
+        "Q": dict(ear_scale=1.10, ear_pitch=8.0),                        # v1 里更竖的那版
+        "R": dict(character.POSE, ear_scale=1.00, ear_pitch=0.0),        # v2 改法版
+    }
+    tiles = []
+    for key, prm in panels.items():
+        p = f"{OUT}/v2-{key}.png"
+        render_variant(prm, p)
+        im = Image.open(p).convert("RGB")
+        d = ImageDraw.Draw(im)
+        d.text((34, 26), key, font=_font(64), fill="#2B2A26")
+        tiles.append(im)
+    sheet = Image.new("RGB", (PW * 3 + 40, PH), "#FFFFFF")
+    for i, im in enumerate(tiles):
+        sheet.paste(im, (i * (PW + 20), 0))
+    sheet.save(f"{OUT}/round1-r2.png")
+    json.dump({"panels": {k: {kk: vv for kk, vv in v.items()} for k, v in panels.items()}},
+              open(f"{OUT}/key-r1r2.json", "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+    print("wrote", f"{OUT}/round1-r2.png")
+
+
 if __name__ == "__main__":
     build_round1()
-    build_round2()
+    build_round1_r2()
+    build_round2(ours=f"{OUT}/v2-R.png")

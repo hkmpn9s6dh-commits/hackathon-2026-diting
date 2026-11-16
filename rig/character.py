@@ -19,6 +19,10 @@ INK = "#33322E"        # 墨（鼻、口、眼）
 
 PALETTE = [STONE, MOSS, CINNABAR, BRONZE, CREAM, INK]
 
+# 展示用的"活气"姿态：头歪一点、两耳不对称、脸微微偏。
+# 三视图和动效都用这一套，免得图和片子对不上。
+POSE = dict(head_tilt=4.5, ear_l=12.0, ear_r=-6.0, face_yaw=-3.0)
+
 BASE = dict(
     ear_style="bell",
     eye_open=0.0,        # 0 闭眼弧，1 睁圆
@@ -126,7 +130,7 @@ def _bell_ear(side, params):
     for i in range(16, -1, -1):
         u = 0.08 + 0.82 * i / 16
         inner.append(_ear_point(attach, d, perp, n, u, -_ear_width(u) * 0.66, depth=0.004, scale=es))
-    shapes.append(Patch(inner, CREAM, outline=False))
+    inner_shapes = [Patch(inner, CREAM, outline=False)]
 
     # 七道水纹（七布泉）
     for k in range(7):
@@ -143,7 +147,7 @@ def _bell_ear(side, params):
                     scale=es,
                 )
             )
-        shapes.append(Poly(line, MOSS, 0.0072, opacity=0.62))
+        inner_shapes.append(Poly(line, BRONZE, 0.0080, opacity=0.80))
 
     # 耳缘
     rim = []
@@ -155,7 +159,7 @@ def _bell_ear(side, params):
         rim.append(_ear_point(attach, d, perp, n, u, -_ear_width(u), depth=0.002))
     shapes.append(Tube(rim + [rim[0]], [0.0105] * (len(rim) + 1), MOSS))
 
-    return shapes
+    return shapes, inner_shapes
 
 
 def build(params=None):
@@ -261,9 +265,18 @@ def build(params=None):
     # ---- 耳朵（画在头之前 → 根部被头盖住），但深度排序会把它放前面；
     #      用 bias 让它落在头之后画
     for side in (-1, 1):
-        shapes = _bell_ear(side, p)
+        shell, inner = _bell_ear(side, p)
         parts.append(
-            Part(f"ear{side}", (side * 0.205, 0.965 + hop, -0.02), shapes)
+            Part(f"ear{side}", (side * 0.185, 0.965 + hop, -0.02), shell)
+        )
+        # 内耳与水纹只在正视/侧视出现：背面看到的是耳背
+        parts.append(
+            Part(
+                f"earinner{side}",
+                (side * 0.185, 0.965 + hop, -0.012),
+                inner,
+                views=("front", "side"),
+            )
         )
 
     # ---- 独角（石笋）
@@ -359,7 +372,7 @@ def build(params=None):
 
     # 头部整体随着 tilt 旋转（屏幕空间绕颈根）
     head_names = {"head", "horn", "muzzle", "nose", "mouth", "dot", "ear-1", "ear1",
-                  "eye-1", "eye1"}
+                  "earinner-1", "earinner1", "eye-1", "eye1"}
     for part in parts:
         if part.name in head_names:
             part.rot = p["head_tilt"]

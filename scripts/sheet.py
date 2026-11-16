@@ -83,7 +83,7 @@ def build_svg():
         "</style>"
     )
 
-    parts = character.build()
+    parts = character.build(character.POSE)
     views = [FRONT, SIDE, BACK]
     boxes = [bounds(parts, v) for v in views]
     max_w = max(b[2] - b[0] for b in boxes)
@@ -116,7 +116,7 @@ def build_svg():
             for num, world in (
                 ("01", (0.055, 1.155, 0.10)),
                 ("02", (-0.300, 1.055, 0.06)),
-                ("03", (0.075, 0.975, 0.26)),
+                ("03", (0.070, 0.935, 0.26)),
                 ("04", (0.085, 0.500, 0.30)),
             ):
                 px = cx + world[0] * scale

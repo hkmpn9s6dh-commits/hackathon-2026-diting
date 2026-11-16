@@ -16,7 +16,7 @@ S = 1500
 
 
 def one(view, out):
-    parts = character.build()
+    parts = character.build(character.POSE)
     x0, y0, x1, y1 = bounds(parts, view)
     scale = (S * 0.80) / max(x1 - x0, y1 - y0)
     cx = S / 2 - (x0 + x1) / 2 * scale
